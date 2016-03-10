@@ -150,7 +150,7 @@ namespace ObjectExporter.VsPackage.Views
                 case ExportType.CSharpObject:
                     return "cs";
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(type));
+                    throw new ArgumentOutOfRangeException("type");
             }
         }
     }

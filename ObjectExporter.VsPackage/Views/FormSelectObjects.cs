@@ -12,7 +12,6 @@ using ObjectExporter.Core.Globals;
 using ObjectExporter.Core.Models;
 using ObjectExporter.Core.Models.Expressions;
 using ObjectExporter.Core.Models.RuleSets;
-using ObjectExporter.VsPackage.Aspects;
 using ObjectExporter.VsPackage.Logging;
 using ObjectExporter.VsPackage.Settings;
 using Telerik.WinControls.Enumerations;
@@ -158,7 +157,8 @@ namespace ObjectExporter.VsPackage.Views
 
         void formDisplayGeneratedText_Shown(object sender, EventArgs e)
         {
-            _waitingDialog?.Close();
+            if (_waitingDialog!=null)
+                _waitingDialog.Close();
         }
 
         private List<ExpressionWithSource> GetAllExpressions()
@@ -295,13 +295,13 @@ namespace ObjectExporter.VsPackage.Views
             Expression checkedExpression = vm.Expression;
             string expressionName = checkedExpression.Name;
 
-            e.Item.Text = $"{expressionName} (calculating...)";
+            e.Item.Text = String.Format("{0} (calculating...)", expressionName);
 
 
             CancellationTokenSource tokenSource = new CancellationTokenSource((int) _settings.DepthSolverTimeOut);
             string depth = await GetDepth(checkedExpression, tokenSource.Token);
 
-            string textToDisplay = $"{expressionName} (max depth: {depth})";
+            string textToDisplay = String.Format("{0} (max depth: {1})", expressionName, depth);
             e.Item.Text = textToDisplay;
         }
 

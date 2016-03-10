@@ -1,3 +1,3 @@
-﻿using ObjectExporter.VsPackage.Aspects;
-
-//[assembly: LogUnhandledException(AttributeTargetTypes = "*.*")]
+﻿//using ObjectExporter.VsPackage.Aspects;
+//
+////[assembly: LogUnhandledException(AttributeTargetTypes = "*.*")]
